@@ -41,6 +41,61 @@
                 arr.push(arr[arr.length - 1] + arr[arr.length - 2]);
                 return arr;
             }
+        }
+        const mergeSort = function (array, p, r) {
+            if (p >= r) {
+                return;
+            }
+            else {
+                let mid = Math.floor(p + (r - p) / 2);
+                mergeSort(array, p, mid);
+                mergeSort(array, mid + 1, r);
+                merge(array, p, mid, r);
+            }
+            return array;
+        };
+
+        const merge = function (array, left, mid, right) {
+            const arr1 = mid - left + 1;
+            const arr2 = right - mid;
+
+            const L = new Array(arr1);
+            const R = new Array(arr2);
+
+            for (let i = 0; i < arr1; i++) {
+                L[i] = array[left + i];
+            }
+
+            for (let j = 0; j < arr2; j++) {
+                R[j] = array[mid + 1 + j];
+            }
+
+            let i = 0, j = 0;
+            let k = left;
+
+            while (i < arr1 && j < arr2) {
+                if (L[i] <= R[j]) {
+                    array[k] = L[i];
+                    i++;
+                }
+                else {
+                    array[k] = R[j];
+                    j++;
+                }
+                k++;
+            }
+
+            while (i < arr1) {
+                array[k] = L[i];
+                i++;
+                k++;
+            }
+
+            while (j < arr2) {
+                array[k] = R[j];
+                j++;
+                k++;
+            }
         }</script>
 </body>
 
